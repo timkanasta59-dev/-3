@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Энергия Природы — Полный Каталог</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F2EDE4;
+    --warm: #E8DDD0;
+    --paper: #FAF7F2;
+    --dark: #1C1610;
+    --brown: #5C3D2A;
+    --gold: #C8973A;
+    --gold-light: #E8BE6A;
+    --rust: #8B4A2A;
+    --muted: #9A8A7A;
+    --ink: #2A1F14;
+    --border: #DDD0C0;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #3D2A1A 0%, #5C3D2A 40%, #8B6040 100%);
+    min-height: 320px;
+    padding: 60px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(200,151,58,0.1);
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  .hero-title span { color: var(--gold-light); }
+
+  .hero-sub {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .hero-jars {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+  }
+
+  .hero-jar {
+    background: linear-gradient(160deg, #2A1A10, #4A2E1A);
+    border: 2px solid rgba(200,151,58,0.35);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: var(--gold-light);
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px 8px;
+  }
+
+  .hero-jar.tall  { width: 100px; height: 150px; }
+  .hero-jar.mid   { width: 85px;  height: 120px; }
+  .hero-jar.short { width: 75px;  height: 100px; }
+  .hero-jar-icon  { font-size: 26px; }
+  .hero-jar-hint  { font-size: 7px; color: rgba(200,151,58,0.4); }
+
+  .contacts-bar {
+    background: var(--dark);
+    padding: 13px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contacts-bar a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .contacts-bar span { color: var(--muted); font-size: 11px; letter-spacing: 2px; }
+
+  .section-header {
+    padding: 44px 60px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .section-header .line { flex: 1; height: 1px; background: var(--border); }
+
+  .section-header .tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .grid {
+    padding: 24px 60px 16px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-top {
+    background: var(--warm);
+    padding: 24px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .badge-rust  { background: #C0856A; }
+  .badge-gold  { background: var(--gold); }
+  .badge-slate { background: #7A8A8A; }
+  .badge-brown { background: var(--brown); }
+  .badge-teal  { background: #5A8A7A; }
+  .badge-wine  { background: #7A3A4A; }
+  .badge-amber { background: #C07A30; }
+
+  .jar {
+    width: 90px; height: 118px;
+    border-radius: 8px;
+    background: linear-gradient(160deg, #2A1A10, #3D2518);
+    border: 1.5px solid rgba(200,151,58,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .jar-icon { font-size: 26px; }
+
+  .jar-name {
+    font-size: 6.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 600;
+    text-align: center;
+    padding: 0 5px;
+  }
+
+  .jar-hint { font-size: 6px; color: rgba(200,151,58,0.35); letter-spacing: 1px; text-transform: uppercase; }
+
+  .card-body {
+    padding: 16px 16px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 3px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .card .category {
+    font-size: 10px;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .benefits { list-style: none; flex: 1; }
+
+  .benefits li {
+    font-size: 11px;
+    color: #4A3A2A;
+    padding: 2px 0;
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  .benefits li::before {
+    content: '✦';
+    color: var(--gold);
+    font-size: 7px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .card-footer {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-count { font-size: 10px; color: var(--muted); }
+
+  .card-price { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .card-price span { font-size: 10px; font-weight: 400; color: var(--muted); }
+
+  /* SMALL cards for 6-col */
+  .card-sm .jar { width: 72px; height: 92px; }
+  .card-sm .jar-icon { font-size: 20px; }
+  .card-sm .card-top { padding: 18px 12px 12px; }
+  .card-sm h3 { font-size: 14px; }
+  .card-sm .card-body { padding: 12px 12px 8px; }
+  .card-sm .benefits li { font-size: 10px; }
+  .card-sm .card-footer { padding: 8px 12px; }
+  .card-sm .card-price { font-size: 12px; }
+
+  /* CREAMS */
+  .creams-section { background: #2D1F14; margin-top: 16px; }
+
+  .creams-section .section-header { padding-top: 36px; }
+  .creams-section .section-header h2 { color: var(--cream); }
+  .creams-section .section-header .line { background: rgba(255,255,255,0.08); }
+  .creams-section .section-header .tag { color: rgba(232,190,106,0.45); }
+
+  .cream-card {
+    background: #3D2A1A;
+    border: 1px solid rgba(200,151,58,0.18);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cream-card-top {
+    background: #2A1A0E;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cream-jar {
+    width: 100%; height: 80px;
+    border: 1px dashed rgba(200,151,58,0.25);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .cream-jar-icon { font-size: 20px; }
+
+  .cream-jar-name {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(200,151,58,0.55);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cream-card-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
+
+  .cream-card .type {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .cream-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: 6px;
+    flex: 1;
+  }
+
+  .cream-card p {
+    font-size: 10px;
+    color: rgba(232,221,200,0.5);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .cream-price {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-light);
+    padding-top: 9px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .trust-bar {
+    background: var(--dark);
+    padding: 18px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(232,221,200,0.45);
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .trust-item span { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Каталог продукции</div>
+    <div class="hero-title">Энергия<br><span>Природы</span></div>
+    <div class="hero-sub">Сила природы<br>для вашего здоровья</div>
+  </div>
+  <div class="hero-jars">
+    <div class="hero-jar short">
+      <div class="hero-jar-icon">🫙</div>
+      <div>Лисичка</div>
+      <div class="hero-jar-hint">заменить</div>
+    </div>
+    <div class="hero-jar tall">
+      <div class="hero-jar-icon">🫙</div>
+      <div>Мухомор</div>
+      <div class="hero-jar-hint">заменить</div>
+    </div>
+    <div class="hero-jar mid">
+      <div class="hero-jar-icon">🫙</div>
+      <div>Ежовик</div>
+      <div class="hero-jar-hint">заменить</div>
+    </div>
+  </div>
+</div>
+
+<div class="contacts-bar">
+  <span>Грибные суперфуды · Натуральные добавки</span>
+  <a href="tel:+79874974987">+7 (987) 497-49-87</a>
+  <a href="https://energiya-prirodi.ru">energiya-prirodi.ru</a>
+  <span>@griblove</span>
+</div>
+
+<!-- МУХОМОРЫ -->
+<div class="section-header">
+  <h2>Экстракты Мухоморов</h2>
+  <div class="line"></div>
+  <div class="tag">Адаптогены · Сила · Баланс</div>
+</div>
+
+<div class="grid grid-4">
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-rust">🍄</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Мухомор Красный</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Мухомор<br>Красный</h3>
+      <div class="category">Адаптоген</div>
+      <ul class="benefits">
+        <li>Снижает тревожность</li>
+        <li>Глубокий сон</li>
+        <li>Восстановление энергии</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">60 капсул</span>
+      <div class="card-price">1300 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-gold">🍄</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Мухомор Пантерный</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Мухомор<br>Пантерный</h3>
+      <div class="category">Тело и сознание</div>
+      <ul class="benefits">
+        <li>Снижение боли</li>
+        <li>Раскрытие чувствительности</li>
+        <li>Устранение блоков</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">60 капсул</span>
+      <div class="card-price">1300 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-slate">🍄</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Спорт-Микс 4 Гриба</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Спорт-Микс<br>4 Гриба</h3>
+      <div class="category">Энергия и фокус</div>
+      <ul class="benefits">
+        <li>Концентрация</li>
+        <li>Выносливость</li>
+        <li>Антистресс</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">60 капсул</span>
+      <div class="card-price">2000 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-brown">🍄</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Дуэт Мухоморов</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Дуэт<br>Мухоморов</h3>
+      <div class="category">Баланс</div>
+      <ul class="benefits">
+        <li>Физическая активность</li>
+        <li>Уверенность</li>
+        <li>Снижение агрессии</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">60 капсул</span>
+      <div class="card-price">1500 <span>₽</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ГРИБНЫЕ ЭКСТРАКТЫ -->
+<div class="section-header">
+  <h2>Грибные Экстракты</h2>
+  <div class="line"></div>
+  <div class="tag">Иммунитет · Мозг · Органы</div>
+</div>
+
+<div class="grid grid-6">
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-slate" style="font-size:10px;">🌑</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Чага</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Чага<br>Экстракт</h3>
+      <div class="category">Иммунитет</div>
+      <ul class="benefits">
+        <li>Снижение воспалений</li>
+        <li>Поддержка печени</li>
+        <li>Очищение от шлаков</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">60 капс</span>
+      <div class="card-price">1300<span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-gold" style="font-size:10px;">🌿</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Шиитаке</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Шиитаке<br>Экстракт</h3>
+      <div class="category">Иммунитет</div>
+      <ul class="benefits">
+        <li>Нормализация сахара</li>
+        <li>Чувствительность к инсулину</li>
+        <li>Антиоксидант</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">100 капс</span>
+      <div class="card-price">1300<span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-amber" style="font-size:10px;">⚡</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Кордицепс</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Кордицепс</h3>
+      <div class="category">Энергия</div>
+      <ul class="benefits">
+        <li>Работа сердца</li>
+        <li>Кислород в крови</li>
+        <li>Повышение выносливости</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капс</span>
+      <div class="card-price">1350<span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-teal" style="font-size:10px;">🌱</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Веселка</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Веселка</h3>
+      <div class="category">Иммунитет</div>
+      <ul class="benefits">
+        <li>Снижение риска грибков</li>
+        <li>Активация NK-клеток</li>
+        <li>Регенерация</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капс</span>
+      <div class="card-price">1500<span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-wine" style="font-size:10px;">❤️</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Рейши</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Рейши</h3>
+      <div class="category">Сердце</div>
+      <ul class="benefits">
+        <li>Нормализация давления</li>
+        <li>Сердечные NK-клетки</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капс</span>
+      <div class="card-price">1500<span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card card-sm">
+    <div class="card-top">
+      <div class="card-badge badge-brown" style="font-size:10px;">🌰</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Траметес</div><div class="jar-hint">заменить</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Траметес</h3>
+      <div class="category">Поддержка органов</div>
+      <ul class="benefits">
+        <li>Противовоспалительное</li>
+        <li>Поддержка печени и ЖКТ</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капс</span>
+      <div class="card-price">1500<span>₽</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ЕЖОВИКИ -->
+<div class="section-header">
+  <h2>Ежовик — Линейка</h2>
+  <div class="line"></div>
+  <div class="tag">Нейро · Мозг · ЦНС</div>
+</div>
+
+<div class="grid grid-3">
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-gold">🧠</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Ежовик Гребенчатый</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Ежовик<br>Гребенчатый</h3>
+      <div class="category">Нейро · Иммунитет</div>
+      <ul class="benefits">
+        <li>Бодрость, снимает волнение</li>
+        <li>Повышает работоспособность</li>
+        <li>Нормализует сон</li>
+        <li>Восстанавливает после истощений</li>
+        <li>Эффективен при деменции</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капсул</span>
+      <div class="card-price">1350 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-amber">🌿</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Ежовика Мицелий</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Ежовика<br>Мицелий</h3>
+      <div class="category">ЦНС · Когниция</div>
+      <ul class="benefits">
+        <li>Острое зрение и слух</li>
+        <li>Высокая концентрация</li>
+        <li>Возвращение когнитивных функций</li>
+        <li>Помогает после инсультов</li>
+        <li>Снимает симптомы ДЦП</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капсул</span>
+      <div class="card-price">1250 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-rust">✨</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Ежовик + Мицелий</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Ежовик +<br>Мицелий</h3>
+      <div class="category">Новинка · Комплекс</div>
+      <ul class="benefits">
+        <li>Активизирует рост клеток мозга</li>
+        <li>Улучшает память и концентрацию</li>
+        <li>Восстанавливает сердечный ритм</li>
+        <li>Снимает хроническую усталость</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">90 капсул</span>
+      <div class="card-price">1300 <span>₽</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ЛИСИЧКА -->
+<div class="section-header">
+  <h2>Лисичка</h2>
+  <div class="line"></div>
+  <div class="tag">Печень · Антипаразитарное · Иммунитет</div>
+</div>
+
+<div class="grid grid-3" style="padding-bottom: 36px;">
+  <div class="card">
+    <div class="card-top">
+      <div class="card-badge badge-rust">🦊</div>
+      <div class="jar"><div class="jar-icon">🫙</div><div class="jar-name">Лисичка Настоящая</div><div class="jar-hint">заменить фото</div></div>
+    </div>
+    <div class="card-body">
+      <h3>Лисичка<br>Настоящая</h3>
+      <div class="category">Суперфуд · Печень</div>
+      <ul class="benefits">
+        <li>Устраняет паразитов</li>
+        <li>Укрепляет мышцы</li>
+        <li>Предотвращает кожные заболевания</li>
+        <li>Улучшает обмен веществ</li>
+        <li>Природный антибиотик</li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <span class="card-count">100 капсул</span>
+      <div class="card-price">990 <span>₽</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-style:dashed;background:transparent;align-items:center;justify-content:center;min-height:180px;text-align:center;padding:32px 16px;">
+    <div style="font-size:36px;margin-bottom:10px;opacity:0.25;">🍄</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--muted);">Новинки скоро</div>
+  </div>
+
+  <div class="card" style="border-style:dashed;background:transparent;align-items:center;justify-content:center;min-height:180px;text-align:center;padding:32px 16px;">
+    <div style="font-size:36px;margin-bottom:10px;opacity:0.25;">🍄</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--muted);">Новинки скоро</div>
+  </div>
+</div>
+
+<!-- CREAMS -->
+<div class="creams-section">
+  <div class="section-header">
+    <h2>Крем Мухомор</h2>
+    <div class="line"></div>
+    <div class="tag">Уходовая линейка · 8 видов</div>
+  </div>
+
+  <div class="grid grid-4" style="padding-bottom:46px;">
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Ночной · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Ночной уход</div>
+        <h3>Крем-уход с вытяжкой мухомора — Ночной</h3>
+        <p>Восстанавливает и питает кожу во время сна.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Дневной · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Дневной уход</div>
+        <h3>Крем-уход с вытяжкой мухомора — Дневной</h3>
+        <p>Защита и тонус в течение дня.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Омолаживающий · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Антивозрастной</div>
+        <h3>Омолаживающий для увлажнения и выравнивания тона</h3>
+        <p>Разглаживает морщины, выравнивает цвет лица.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Спаситель · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Заживление</div>
+        <h3>Для заживления и обезболивания воспалений</h3>
+        <p>Снимает воспаление, ускоряет регенерацию.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">От варикоза · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">От варикоза</div>
+        <h3>Для ухода за состоянием ног, вен и сосудов</h3>
+        <p>Улучшает кровообращение, снимает тяжесть.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Суставы · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Суставы</div>
+        <h3>Для ухода в области суставов и опорно-двигательного аппарата</h3>
+        <p>Восстанавливает подвижность, снимает боль.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Для пяток · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Уход за стопами</div>
+        <h3>Для ухода за кожей стоп</h3>
+        <p>Смягчает огрубевшую кожу, устраняет трещины.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+
+    <div class="cream-card">
+      <div class="cream-card-top"><div class="cream-jar"><div class="cream-jar-icon">🫙</div><div class="cream-jar-name">Для рук · заменить</div></div></div>
+      <div class="cream-card-body">
+        <div class="type">Для рук</div>
+        <h3>Для сухой кожи рук и запястий</h3>
+        <p>Интенсивное питание и защита кожи рук.</p>
+        <div class="cream-price">50 мл — 350 ₽</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span>🌿</span> 100% натурально</div>
+  <div class="trust-item"><span>🍄</span> Грибная экстракция</div>
+  <div class="trust-item"><span>🔬</span> Научная формула</div>
+  <div class="trust-item"><span>✓</span> Контроль качества</div>
+  <div class="trust-item"><span>📞</span> +7 (987) 497-49-87</div>
+</div>
+
+</body>
+</html>
